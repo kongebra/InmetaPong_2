@@ -7,17 +7,21 @@ public class BallControllerV2 : MonoBehaviour
     private const string PLAYER_TAG = "Player";
     private const string DEATH_WALL_TAG = "Death Wall";
 
+    [Header("Ball Settings")]
     [SerializeField]
     private float _initialSpeed = 10f;
     [SerializeField]
     private float _speedCoefficient = 1.1f;
     private float _currentSpeed = 0f;
 
-    private Rigidbody2D _rb;
-
-    private Vector2 _direction;
-
+    [Header("Game Events")]
     [SerializeField]
+    private GameEvent _onBallHitPlayer;
+    [SerializeField]
+    private GameEvent _onBallHitDeathWall;
+
+    private Rigidbody2D _rb;
+    private Vector2 _direction;
     private BoxCollider2D _bounds;
 
     private float RADIUS => 0.25f;
@@ -27,11 +31,6 @@ public class BallControllerV2 : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
 
         _currentSpeed = _initialSpeed;
-    }
-
-    private void Start()
-    {
-        _direction = new Vector2(1f, Random.Range(-1f, 1f)).normalized;
     }
 
     private void FixedUpdate()
@@ -57,11 +56,6 @@ public class BallControllerV2 : MonoBehaviour
         _rb.MovePosition(step);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(PLAYER_TAG))
@@ -72,13 +66,28 @@ public class BallControllerV2 : MonoBehaviour
             _direction = new Vector2(1f, hitFactor).normalized;
 
             _currentSpeed *= _speedCoefficient;
+
+            _onBallHitPlayer?.Raise();
         }
 
         if (other.CompareTag(DEATH_WALL_TAG))
         {
-            Debug.Log("Ball hit death zone");
-            // TODO: Implement score thing thingy, and big explosion
+            _onBallHitDeathWall?.Raise();
+
+            // TODO: Simple particles for showing the ball explodes?
+
             Destroy(gameObject);
         }
+    }
+
+    internal void SetBounds(BoxCollider2D bounds)
+    {
+        _bounds = bounds;
+    }
+
+    internal void Init()
+    {
+        _currentSpeed = _initialSpeed;
+        _direction = new Vector2(1f, Random.Range(-1f, 1f)).normalized;
     }
 }

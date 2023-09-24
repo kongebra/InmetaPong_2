@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class HighScoresManager : MonoBehaviour
 {
+    public static HighScoresManager Instance;
+
     private string filePath;
     public List<PlayerScoreData> highScores = new List<PlayerScoreData>();
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         filePath = Path.Combine("./highScoresnew.json");
 
         LoadScores();

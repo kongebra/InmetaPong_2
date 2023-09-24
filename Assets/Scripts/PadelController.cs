@@ -46,4 +46,14 @@ public class PadelController : MonoBehaviour
     {
         _inputActions?.Disable();
     }
+
+    public void DisableControls()
+    {
+        _inputActions?.Disable();
+    }
+
+    public void EnableControls()
+    {
+        _inputActions?.Enable();
+    }
 }
