@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
 {
     public float speed;
     private Vector2 direction;
-    //public GameObject gameOverPanel; // Assuming you have a UI panel to show game over
+    public GameObject gameOverPanel; // Assuming you have a UI panel to show game over
     public GameObject _canvasGO;
     private Canvas _canvas;
     private Canvas _gameOverPanelCanvas;
