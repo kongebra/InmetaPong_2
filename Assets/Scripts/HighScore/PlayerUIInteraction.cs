@@ -7,9 +7,7 @@ public class PlayerUIInteraction : MonoBehaviour
 {
     public HighScoresManager scoresManager;
     public BallController ballController;
-    //public GameObject gameOverPanel;
-    public GameObject _canvasGO;
-    private Canvas _canvas;
+    public GameObject gameOverPanel;
     public TMP_InputField nameInput;
     public TMP_InputField phoneInput;
     public TextMeshProUGUI highScoresText;
@@ -19,10 +17,12 @@ public class PlayerUIInteraction : MonoBehaviour
     private PlayerScoreData currentPlayer;
     public bool newPlayer = true;
 
+    [SerializeField]
+    private GameEvent _onStartNewGame;
+
     public void Awake()
     {
         tryAgainBtn.gameObject.SetActive(false);
-        _canvas = _canvasGO.GetComponent<Canvas>();
     }
 
     public void StartNewGame()
@@ -36,6 +36,7 @@ public class PlayerUIInteraction : MonoBehaviour
         currentPlayer.phoneNumber = phoneInput.text;
         currentPlayer.score = ballController.score;
 
+        _onStartNewGame?.Raise();
 
         // Restart game logic here...
     }
@@ -106,8 +107,7 @@ public class PlayerUIInteraction : MonoBehaviour
         newPlayer = false;
         // Restart game logic here...
 
-        //gameOverPanel.SetActive(false);
-        _canvas.enabled = false;
+        gameOverPanel.SetActive(false);
 
         enterHighScoreBtn.enabled = false;
 
@@ -119,6 +119,7 @@ public class PlayerUIInteraction : MonoBehaviour
         ballController.ResetScore();
         tryAgainBtn.gameObject.SetActive(true);
 
+        _onStartNewGame?.Raise();
     }
 
     public void NewPlayer()
@@ -128,7 +129,7 @@ public class PlayerUIInteraction : MonoBehaviour
         currentPlayer = null;
 
         nameInput.text = "";
-        phoneInput.text ="";
+        phoneInput.text = "";
 
         nameInput.gameObject.SetActive(true);
         phoneInput.gameObject.SetActive(true);
@@ -136,10 +137,11 @@ public class PlayerUIInteraction : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(false);
 
 
-        //gameOverPanel.SetActive(false);
-        _canvas.enabled = false;
+        gameOverPanel.SetActive(false);
 
         ballController.ResetBall();
         ballController.ResetScore();
+
+        _onStartNewGame?.Raise();
     }
 }
