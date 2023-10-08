@@ -1454,6 +1454,9 @@ GameObject:
   - component: {fileID: 739000002}
   - component: {fileID: 739000003}
   - component: {fileID: 739000004}
+  - component: {fileID: 739000005}
+  - component: {fileID: 739000007}
+  - component: {fileID: 739000006}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1521,8 +1524,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738999998}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.821112, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.1538, z: 1}
+  m_LocalPosition: {x: -22.48743, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 974324730}
@@ -1587,7 +1590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341dcb4173b85374ba106cff17fc612f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  _speed: 5
+  bounds: 5
+  padelLength: 2
 --- !u!114 &739000004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,6 +1608,104 @@ MonoBehaviour:
   anchorType: 3
   anchorOffset: {x: -0.27, y: 0, z: 0}
   JustXAxis: 1
+--- !u!114 &739000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738999998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: abf92832dc8e04941bcbee6047808fb7, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &739000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738999998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739000003}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: EnableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 739000003}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ResetPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &739000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738999998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739000003}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DisableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &746496866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,7 +1785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746496866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.52111065, y: 0, z: 0}
+  m_LocalPosition: {x: 5.1874304, y: 0, z: 0}
   m_LocalScale: {x: 0.7802, y: 18.495756, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2797,10 +2900,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  gameOverPanel: {fileID: 1934009093}
   _canvasGO: {fileID: 55185841}
   score: 0
   scoreText: {fileID: 782021530}
+  _onBallHitPlayer: {fileID: 11400000, guid: 1181324aeca071545bc1bf2431022f07, type: 2}
+  _onBallHitDeathWall: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
 --- !u!82 &1231776758
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3787,6 +3891,7 @@ MonoBehaviour:
   enterHighScoreBtn: {fileID: 1449367391}
   tryAgainBtn: {fileID: 175581455}
   newPlayer: 1
+  _onStartNewGame: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
 --- !u!1 &2016969270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4317,7 +4422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054116758}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.241112, y: 0, z: 0}
+  m_LocalPosition: {x: -22.90743, y: 0, z: 0}
   m_LocalScale: {x: 0.7802, y: 18.495756, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -19,6 +19,12 @@ public class BallController : MonoBehaviour
     private float startSpeed;
     private AudioSource _audioSource;
 
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEvent _onBallHitPlayer;
+    [SerializeField]
+    private GameEvent _onBallHitDeathWall;
+
     void Awake()
     {
         originalPos = transform.position;
@@ -69,7 +75,7 @@ public class BallController : MonoBehaviour
         hitFactor = Mathf.Clamp(hitFactor, -0.7071f, 0.7071f);  // This limits the vertical reflection to approximately 45 degrees
 
         // Adjust the y-direction based on where the ball hit the paddle
-        direction.y += hitFactor; 
+        direction.y += hitFactor;
 
         var positive = direction.y > 0;
         var negative = direction.y < 0;
@@ -96,6 +102,8 @@ public class BallController : MonoBehaviour
         // If the ball hits the player, bounce and increase score
         if (collision.gameObject.name == "Player")
         {
+            _onBallHitPlayer?.Raise();
+
             //_gameOverPanelCanvas.enabled = true;
             _audioSource.Play();
             HandlePaddleHit(collision);
@@ -112,6 +120,8 @@ public class BallController : MonoBehaviour
         }
         else
         {
+            _onBallHitDeathWall?.Raise();
+
             // Ball passed the player, game over
             //gameOverPanel.SetActive(true);
             _canvas.enabled = true;
