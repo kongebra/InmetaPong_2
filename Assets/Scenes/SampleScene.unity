@@ -716,7 +716,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283301239}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3735,7 +3735,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934009093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3780,7 +3780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoresManager: {fileID: 656899508}
   ballController: {fileID: 1231776757}
-  gameOverPanel: {fileID: 1934009093}
+  _canvasGO: {fileID: 55185841}
   nameInput: {fileID: 967157304}
   phoneInput: {fileID: 831725367}
   highScoresText: {fileID: 1090518267}
