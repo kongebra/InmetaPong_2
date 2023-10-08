@@ -7,7 +7,9 @@ public class PlayerUIInteraction : MonoBehaviour
 {
     public HighScoresManager scoresManager;
     public BallController ballController;
-    public GameObject gameOverPanel;
+    //public GameObject gameOverPanel;
+    public GameObject _canvasGO;
+    private Canvas _canvas;
     public TMP_InputField nameInput;
     public TMP_InputField phoneInput;
     public TextMeshProUGUI highScoresText;
@@ -20,6 +22,7 @@ public class PlayerUIInteraction : MonoBehaviour
     public void Awake()
     {
         tryAgainBtn.gameObject.SetActive(false);
+        _canvas = _canvasGO.GetComponent<Canvas>();
     }
 
     public void StartNewGame()
@@ -103,7 +106,8 @@ public class PlayerUIInteraction : MonoBehaviour
         newPlayer = false;
         // Restart game logic here...
 
-        gameOverPanel.SetActive(false);
+        //gameOverPanel.SetActive(false);
+        _canvas.enabled = false;
 
         enterHighScoreBtn.enabled = false;
 
@@ -132,7 +136,8 @@ public class PlayerUIInteraction : MonoBehaviour
         tryAgainBtn.gameObject.SetActive(false);
 
 
-        gameOverPanel.SetActive(false);
+        //gameOverPanel.SetActive(false);
+        _canvas.enabled = false;
 
         ballController.ResetBall();
         ballController.ResetScore();

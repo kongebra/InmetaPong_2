@@ -7,18 +7,25 @@ public class BallController : MonoBehaviour
 {
     public float speed;
     private Vector2 direction;
-    public GameObject gameOverPanel; // Assuming you have a UI panel to show game over
+    //public GameObject gameOverPanel; // Assuming you have a UI panel to show game over
+    public GameObject _canvasGO;
+    private Canvas _canvas;
+    private Canvas _gameOverPanelCanvas;
     public int score = 0;
     public TextMeshProUGUI scoreText; // UI Text to display score
 
     private float maxY = 1.0f;
     private Vector3 originalPos;
     private float startSpeed;
+    private AudioSource _audioSource;
 
     void Awake()
     {
         originalPos = transform.position;
         startSpeed = speed;
+        _audioSource = GetComponent<AudioSource>();
+        _gameOverPanelCanvas = GetComponent<Canvas>();
+        _canvas = _canvasGO.GetComponent<Canvas>();
     }
 
     void Start()
@@ -26,7 +33,8 @@ public class BallController : MonoBehaviour
         // Start by moving the ball to the right and slightly upwards
         direction = new Vector2(1, 1).normalized;
         SetScoreText();
-        gameOverPanel.SetActive(false);
+        //gameOverPanel.SetActive(false);
+        _canvas.enabled = false;
     }
 
     public void ResetScore()
@@ -61,7 +69,7 @@ public class BallController : MonoBehaviour
         hitFactor = Mathf.Clamp(hitFactor, -0.7071f, 0.7071f);  // This limits the vertical reflection to approximately 45 degrees
 
         // Adjust the y-direction based on where the ball hit the paddle
-        direction.y += hitFactor;
+        direction.y += hitFactor; 
 
         var positive = direction.y > 0;
         var negative = direction.y < 0;
@@ -88,6 +96,8 @@ public class BallController : MonoBehaviour
         // If the ball hits the player, bounce and increase score
         if (collision.gameObject.name == "Player")
         {
+            //_gameOverPanelCanvas.enabled = true;
+            _audioSource.Play();
             HandlePaddleHit(collision);
             speed *= 1.05f;
             //direction = new Vector2(-direction.x, direction.y);
@@ -98,11 +108,13 @@ public class BallController : MonoBehaviour
         {
             // If it's not the right wall, bounce off normally
             direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+            _audioSource.Play();
         }
         else
         {
             // Ball passed the player, game over
-            gameOverPanel.SetActive(true);
+            //gameOverPanel.SetActive(true);
+            _canvas.enabled = true;
             speed = 0;
 
             var playerUIInteraction = GameObject.Find("GameOverPanel").GetComponent<PlayerUIInteraction>();
