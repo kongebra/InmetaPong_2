@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private GameEvent _unpauseGameEvent;
     [SerializeField]
     private GameEvent _updateScoreTextEvent;
+    [SerializeField]
+    private GameEvent _gotoFormInputEvent;
 
 
     private GameState _gameState = GameState.Menu;
@@ -62,8 +64,8 @@ public class GameManager : MonoBehaviour
         switch (_gameState)
         {
             case GameState.GameOver:
-                // TODO: Show form panel
-                Debug.Log("Triangle pressed");
+                _gotoFormInputEvent?.Raise();
+                _gameState = GameState.FormInput;
                 break;
         }
     }
@@ -83,7 +85,6 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 _unpauseGameEvent?.Raise();
                 break;
-
         }
     }
 
@@ -97,11 +98,6 @@ public class GameManager : MonoBehaviour
                 _gameState = GameState.Playing;
                 break;
         }
-    }
-
-    private void Update()
-    {
-
     }
 
     public void OnBallHitPlayerEventHandler()

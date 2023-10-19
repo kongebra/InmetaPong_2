@@ -37,16 +37,16 @@ public class UIManager : MonoBehaviour
     [Header("Highscore Panel")]
     [SerializeField]
     private GameObject _highscorePanel;
-    public void ShowHighscorePanel() => _highscorePanel.SetActive(true);
-    public void HideHighscorePanel() => _highscorePanel.SetActive(false);
+    private void ShowHighscorePanel() => _highscorePanel.SetActive(true);
+    private void HideHighscorePanel() => _highscorePanel.SetActive(false);
     #endregion
 
     #region Submit Form Panel
     [Header("Submit Form Panel")]
     [SerializeField]
     private GameObject _submitFormPanel;
-    public void ShowSubmitFormPanel() => _submitFormPanel.SetActive(true);
-    public void HideSubmitFormPanel() => _submitFormPanel.SetActive(false);
+    private void ShowSubmitFormPanel() => _submitFormPanel.SetActive(true);
+    private void HideSubmitFormPanel() => _submitFormPanel.SetActive(false);
     #endregion
 
     #region Game Over Panel
@@ -55,8 +55,8 @@ public class UIManager : MonoBehaviour
     private GameObject _gameOverPanel;
     [SerializeField]
     private TMPro.TextMeshProUGUI _gameOverScoreText;
-    public void ShowGameOverPanel() => _gameOverPanel.SetActive(true);
-    public void HideGameOverPanel() => _gameOverPanel.SetActive(false);
+    private void ShowGameOverPanel() => _gameOverPanel.SetActive(true);
+    private void HideGameOverPanel() => _gameOverPanel.SetActive(false);
     #endregion
 
     public void HandleGameOver()
