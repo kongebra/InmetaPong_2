@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [SerializeField]
+    private TMPro.TextMeshProUGUI _scoreText;
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +24,7 @@ public class UIManager : MonoBehaviour
         HideGameOverPanel();
     }
 
+    [Header("Panels")]
     #region Highscore Panel
     [SerializeField]
     private GameObject _highscorePanel;
@@ -61,5 +65,10 @@ public class UIManager : MonoBehaviour
         ShowSubmitFormPanel();
         HideHighscorePanel();
         HideGameOverPanel();
+    }
+
+    public void UpdateScoreText()
+    {
+        _scoreText.SetText($"Score: {GameManager.Instance.Score}");
     }
 }
