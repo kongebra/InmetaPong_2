@@ -95,4 +95,14 @@ public class UIManager : MonoBehaviour
         _gameOverScoreText.text = $"Score: {GameManager.Instance.Score}";
         _scoreText.SetText($"Score: {GameManager.Instance.Score}");
     }
+
+    public void HandlePauseGame()
+    {
+        _backdrop.SetActive(true);
+    }
+
+    public void HandleUnpauseGame()
+    {
+        _backdrop.SetActive(false);
+    }
 }

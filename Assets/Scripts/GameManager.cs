@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameEvent _startGameEvent;
     [SerializeField]
+    private GameEvent _pauseGameEvent;
+    [SerializeField]
+    private GameEvent _unpauseGameEvent;
+    [SerializeField]
     private GameEvent _updateScoreTextEvent;
 
 
@@ -50,6 +54,18 @@ public class GameManager : MonoBehaviour
 
         _inputActions.Player.Jump.performed += ctx => HandleJumpPerformed(ctx);
         _inputActions.Player.Start.performed += ctx => HandleStartPerformed(ctx);
+        _inputActions.Player.Triangle.performed += ctx => HandleTrianglePerformed(ctx);
+    }
+
+    private void HandleTrianglePerformed(InputAction.CallbackContext ctx)
+    {
+        switch (_gameState)
+        {
+            case GameState.GameOver:
+                // TODO: Show form panel
+                Debug.Log("Triangle pressed");
+                break;
+        }
     }
 
     private void HandleStartPerformed(InputAction.CallbackContext ctx)
@@ -59,11 +75,13 @@ public class GameManager : MonoBehaviour
             case GameState.Playing:
                 _gameState = GameState.Paused;
                 Time.timeScale = 0f;
+                _pauseGameEvent?.Raise();
                 break;
 
             case GameState.Paused:
                 _gameState = GameState.Playing;
                 Time.timeScale = 1f;
+                _unpauseGameEvent?.Raise();
                 break;
 
         }
@@ -74,6 +92,7 @@ public class GameManager : MonoBehaviour
         switch (_gameState)
         {
             case GameState.Menu:
+            case GameState.GameOver:
                 _startGameEvent?.Raise();
                 _gameState = GameState.Playing;
                 break;
