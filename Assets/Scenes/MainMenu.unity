@@ -380,6 +380,82 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &485121571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 485121572}
+  - component: {fileID: 485121574}
+  - component: {fileID: 485121573}
+  m_Layer: 5
+  m_Name: Backdrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &485121572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485121571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1595394465}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &485121573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485121571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &485121574
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485121571}
+  m_CullTransparentMesh: 1
 --- !u!1 &544546252
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +499,8 @@ GameObject:
   - component: {fileID: 558221154}
   - component: {fileID: 558221155}
   - component: {fileID: 558221156}
+  - component: {fileID: 558221158}
+  - component: {fileID: 558221157}
   m_Layer: 0
   m_Name: GameManger
   m_TagString: Untagged
@@ -458,8 +536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballSpeedCoefficient: 1.1
-  _currentScore: 0
-  _updateScoreTextEvent: {fileID: 0}
+  _startGameEvent: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
+  _updateScoreTextEvent: {fileID: 11400000, guid: 9f46b97e0641a2946aad877c63df6dd8, type: 2}
 --- !u!114 &558221156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,13 +550,93 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _event: {fileID: 11400000, guid: 1181324aeca071545bc1bf2431022f07, type: 2}
+  _event: {fileID: 11400000, guid: c12276869a1f1c24eb2c87bb4c8061ea, type: 2}
   _response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 558221155}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnBallHitPlayerEventHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &558221157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558221153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 628499157}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DisableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 558221155}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HandleGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &558221158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558221153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 628499157}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: EnableControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 558221155}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HandleGameStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -499,6 +657,8 @@ GameObject:
   - component: {fileID: 581580918}
   - component: {fileID: 581580919}
   - component: {fileID: 581580920}
+  - component: {fileID: 581580922}
+  - component: {fileID: 581580921}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -534,9 +694,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 965306161}
+  _backdrop: {fileID: 485121571}
   _highscorePanel: {fileID: 1289010428}
   _submitFormPanel: {fileID: 1287691876}
   _gameOverPanel: {fileID: 1641602719}
+  _gameOverScoreText: {fileID: 1679696840}
 --- !u!114 &581580920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +727,62 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &581580921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581580917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 581580919}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: HandleGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &581580922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581580917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 581580919}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: HandleGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &628499154
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +795,7 @@ GameObject:
   - component: {fileID: 628499155}
   - component: {fileID: 628499157}
   - component: {fileID: 628499158}
+  - component: {fileID: 628499159}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -664,8 +883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  bounds: 11
-  padelLength: 4
+  _ball: {fileID: 718975364}
+  _bounds: 11
+  _padelLength: 4
 --- !u!61 &628499158
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -692,6 +912,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &628499159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628499154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 628499157}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: HandleGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &718975359
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,9 +950,10 @@ GameObject:
   m_Component:
   - component: {fileID: 718975361}
   - component: {fileID: 718975360}
-  - component: {fileID: 718975363}
   - component: {fileID: 718975362}
+  - component: {fileID: 718975363}
   - component: {fileID: 718975364}
+  - component: {fileID: 718975365}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -787,14 +1036,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718975359}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -828,8 +1077,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5457960a6e4809c49a39d65d6166410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _onBallHitPlayer: {fileID: 0}
+  _initialSpeed: 15
+  _onBallHitPlayer: {fileID: 11400000, guid: c12276869a1f1c24eb2c87bb4c8061ea, type: 2}
+  _onBallHitDeathWall: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+--- !u!114 &718975365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718975359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9d8ccc2bd387244ae79747e5e06918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 718975364}
+        m_TargetAssemblyTypeName: Ball, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &805406267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8474604669493789600, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
@@ -880,6 +1158,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &964700365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 541401376704903238, guid: 068e513b43898ae478a8edf1dcc60fbb, type: 3}
+  m_PrefabInstance: {fileID: 541401376832540444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &964700371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964700365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bba9650f4ac0f419ecbf57f8d0e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}
 --- !u!1 &965306159
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +1207,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1595394465}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1279,6 +1575,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 485121572}
   - {fileID: 1289010429}
   - {fileID: 1641602720}
   - {fileID: 1287691877}
@@ -1301,6 +1598,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8474604668684737339, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
   m_PrefabInstance: {fileID: 8474604669225321883}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1679696840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8474604668993432559, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
+  m_PrefabInstance: {fileID: 8474604669225321883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1761440004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1761440005}
   - component: {fileID: 1761440006}
+  - component: {fileID: 1761440007}
   m_Layer: 0
   m_Name: Death Zone
   m_TagString: DeathWall
@@ -1385,6 +1694,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1761440007
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761440004}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1921472750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +2037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 541401377853043681, guid: 068e513b43898ae478a8edf1dcc60fbb, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 541401377853043681, guid: 068e513b43898ae478a8edf1dcc60fbb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2475,7 +2810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5918483747204425330, guid: f4a84067b251dda4193e0f889b1d5644, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5918483747204425330, guid: f4a84067b251dda4193e0f889b1d5644, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2620,7 +2955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8474604668684737339, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8474604668684737339, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2714,6 +3049,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -303
       objectReference: {fileID: 0}
+    - target: {fileID: 8474604668993432554, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
+      propertyPath: m_Name
+      value: Game Over Score Text
+      objectReference: {fileID: 0}
     - target: {fileID: 8474604669493789607, guid: a55f371a44e322743bb953ca4d409c03, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2753,4 +3092,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bba9650f4ac0f419ecbf57f8d0e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _event: {fileID: 11400000, guid: e5af4ba4a6b4a324d8e9cddb32ba9499, type: 2}
+  _event: {fileID: 11400000, guid: 5c783020f0de38c4eadee7360b56e52a, type: 2}

@@ -5,24 +5,35 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [Header("Ball Stats")]
+
     [SerializeField]
+    private float _initialSpeed = 15f;
     private float _speed = 10f;
+
+    private bool _idleState = true;
 
     [Header("Game Events")]
     [SerializeField]
     private GameEvent _onBallHitPlayer;
+    [SerializeField]
+    private GameEvent _onBallHitDeathWall;
 
     private Vector2 _direction = Vector2.zero;
 
-    private void Start()
+    private void Awake()
     {
         Reset();
+
+        _idleState = true;
     }
 
     public void Reset()
     {
+        _idleState = false;
+
+        _speed = _initialSpeed;
         transform.position = Vector3.zero;
-        _direction = Vector2.one.normalized;
+        _direction = (-Vector2.one).normalized;
     }
 
     private void FixedUpdate()
@@ -30,21 +41,34 @@ public class Ball : MonoBehaviour
         transform.Translate(_direction * _speed * Time.fixedDeltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _onBallHitPlayer?.Raise();
-
             HandlePaddleHit(collision);
 
-            _speed *= GameManager.Instance.SpeedMultiplier;
+            if (!_idleState)
+            {
+                _onBallHitPlayer?.Raise();
+                _speed *= GameManager.Instance.SpeedMultiplier;
 
+                Debug.Log($"Ball speed: {_speed}");
+            }
+
+        }
+
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            // If it's not the right wall, bounce off normally
+            _direction = Vector2.Reflect(_direction, collision.contacts[0].normal);
+
+            // TODO: Audio
         }
 
         else if (collision.gameObject.CompareTag("DeathWall"))
         {
-            _direction.y = -_direction.y;
+            _onBallHitDeathWall?.Raise();
+            _speed = 0f;
         }
     }
 

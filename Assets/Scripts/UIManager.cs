@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("Texts")]
     [SerializeField]
     private TMPro.TextMeshProUGUI _scoreText;
 
@@ -22,10 +23,18 @@ public class UIManager : MonoBehaviour
         ShowHighscorePanel();
         HideSubmitFormPanel();
         HideGameOverPanel();
+
+        _backdrop.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
     }
+
+    [Header("Backdrop")]
+    [SerializeField]
+    private GameObject _backdrop;
 
     [Header("Panels")]
     #region Highscore Panel
+    [Header("Highscore Panel")]
     [SerializeField]
     private GameObject _highscorePanel;
     public void ShowHighscorePanel() => _highscorePanel.SetActive(true);
@@ -33,6 +42,7 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Submit Form Panel
+    [Header("Submit Form Panel")]
     [SerializeField]
     private GameObject _submitFormPanel;
     public void ShowSubmitFormPanel() => _submitFormPanel.SetActive(true);
@@ -40,35 +50,49 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Game Over Panel
+    [Header("Game Over Panel")]
     [SerializeField]
     private GameObject _gameOverPanel;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI _gameOverScoreText;
     public void ShowGameOverPanel() => _gameOverPanel.SetActive(true);
     public void HideGameOverPanel() => _gameOverPanel.SetActive(false);
     #endregion
 
-    public void HandleOnGameOver()
+    public void HandleGameOver()
     {
         ShowGameOverPanel();
         HideHighscorePanel();
         HideSubmitFormPanel();
+
+        _backdrop.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
     }
 
-    public void HandleOnPlayButtonClicked()
+    public void HandleGameStart()
     {
         HideGameOverPanel();
         HideHighscorePanel();
         HideSubmitFormPanel();
+
+        _backdrop.SetActive(false);
+        _scoreText.gameObject.SetActive(true);
     }
 
-    public void HandleOnSubmitScoreButtonClicked()
+    public void ShowForm()
     {
         ShowSubmitFormPanel();
         HideHighscorePanel();
         HideGameOverPanel();
+
+        _backdrop.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
     }
+
 
     public void UpdateScoreText()
     {
+        _gameOverScoreText.text = $"Score: {GameManager.Instance.Score}";
         _scoreText.SetText($"Score: {GameManager.Instance.Score}");
     }
 }
