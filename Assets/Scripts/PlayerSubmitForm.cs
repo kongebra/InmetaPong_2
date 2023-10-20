@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerSubmitForm : MonoBehaviour
 {
@@ -33,6 +35,37 @@ public class PlayerSubmitForm : MonoBehaviour
         ClearErrors();
     }
 
+    private void Start()
+    {
+        // focus on name input field
+        EventSystem.current.SetSelectedGameObject(_nameInputField.gameObject, null);
+        _nameInputField.OnPointerClick(new PointerEventData(EventSystem.current));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (_nameInputField.isFocused)
+            {
+                _emailInputField.Select();
+            }
+            else if (_emailInputField.isFocused)
+            {
+                _phoneInputField.Select();
+            }
+            else if (_phoneInputField.isFocused)
+            {
+                _nameInputField.Select();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            HandleSubmitButtonClicked();
+        }
+    }
+
     private void HandleSubmitButtonClicked()
     {
         var hasError = false;
@@ -50,10 +83,16 @@ public class PlayerSubmitForm : MonoBehaviour
             // Should this be required?
         }
 
-        var email = _emailInputField.text;
+        var email = _emailInputField.text.ToLower();
         if (string.IsNullOrEmpty(email))
         {
             _emailErrorText.text = "Email is required";
+            hasError = true;
+        }
+
+        if (!IsValidEmail(email))
+        {
+            _emailErrorText.text = "Email is invalid";
             hasError = true;
         }
 
@@ -74,6 +113,15 @@ public class PlayerSubmitForm : MonoBehaviour
 
         ClearInputs();
         ClearErrors();
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        // Regular expression pattern for a valid email
+        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+        // Use the Regex.IsMatch method to check if the email matches the pattern
+        return Regex.IsMatch(email, pattern);
     }
 
     private void ClearInputs()

@@ -1273,7 +1273,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.45882353, g: 0.8745098, b: 0.7372549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1350,6 +1350,8 @@ MonoBehaviour:
   _initialSpeed: 15
   _onBallHitPlayer: {fileID: 11400000, guid: c12276869a1f1c24eb2c87bb4c8061ea, type: 2}
   _onBallHitDeathWall: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
+  _gameVolume: 1
+  _idleGameVolume: 0.25
 --- !u!114 &718975365
 MonoBehaviour:
   m_ObjectHideFlags: 0

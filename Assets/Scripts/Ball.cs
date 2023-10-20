@@ -19,22 +19,28 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private GameEvent _onBallHitDeathWall;
 
+    [Header("Audio Settings")]
+    [SerializeField, Range(0f, 1f)]
+    private float _gameVolume = 1f;
+    [SerializeField, Range(0f, 1f)]
+    private float _idleGameVolume = 0.25f;
+
     private Vector2 _direction = Vector2.zero;
 
     private AudioSource _audioSource;
 
     private void Awake()
     {
-        Reset();
-
-        _idleState = true;
-
         _audioSource = GetComponent<AudioSource>();
+
+        Reset(true);
     }
 
     public void Reset(bool idleState = false)
     {
         _idleState = idleState;
+
+        _audioSource.volume = _idleState ? _idleGameVolume : _gameVolume;
 
         _speed = _initialSpeed;
         transform.position = Vector3.zero;

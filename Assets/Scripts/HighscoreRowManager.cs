@@ -82,8 +82,23 @@ public class HighscoreRowManager : MonoBehaviour
 
     public void AddScore(PlayerScoreData data)
     {
-        // Add score
-        _playerScores.Add(data);
+        // Handle duplicate emails
+        var index = _playerScores.FindIndex(x => x.email == data.email);
+        if (index >= 0)
+        {
+            var prevScore = _playerScores[index].score;
+            // Check if we want to update the score
+            if (prevScore < data.score)
+            {
+                // Update score
+                _playerScores[index] = data;
+            }
+        }
+        else
+        {
+            // New player/email, add score
+            _playerScores.Add(data);
+        }
 
         // Sort scores
         SortScores();
