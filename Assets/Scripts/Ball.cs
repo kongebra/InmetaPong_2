@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Ball : MonoBehaviour
 {
     [Header("Ball Stats")]
@@ -20,11 +21,15 @@ public class Ball : MonoBehaviour
 
     private Vector2 _direction = Vector2.zero;
 
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         Reset();
 
         _idleState = true;
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void Reset(bool idleState = false)
@@ -54,6 +59,8 @@ public class Ball : MonoBehaviour
                 _speed *= GameManager.Instance.SpeedMultiplier;
             }
 
+            _audioSource.Play();
+
         }
 
         else if (collision.gameObject.CompareTag("Wall"))
@@ -61,13 +68,15 @@ public class Ball : MonoBehaviour
             // If it's not the right wall, bounce off normally
             _direction = Vector2.Reflect(_direction, collision.contacts[0].normal);
 
-            // TODO: Audio
+            _audioSource.Play();
         }
 
         else if (collision.gameObject.CompareTag("DeathWall"))
         {
             _onBallHitDeathWall?.Raise();
             _speed = 0f;
+
+            // TODO: Any sound or visual effects here?
         }
     }
 
