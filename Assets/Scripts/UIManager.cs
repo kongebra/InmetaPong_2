@@ -89,6 +89,15 @@ public class UIManager : MonoBehaviour
         _scoreText.gameObject.SetActive(false);
     }
 
+    public void HandleScoreSubmitted()
+    {
+        HideSubmitFormPanel();
+        ShowHighscorePanel();
+        HideGameOverPanel();
+
+        _backdrop.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
+    }
 
     public void UpdateScoreText()
     {

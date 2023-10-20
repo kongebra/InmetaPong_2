@@ -119,6 +119,11 @@ public class GameManager : MonoBehaviour
         _gameState = GameState.GameOver;
     }
 
+    public void HandleScoreSubmitted()
+    {
+        _gameState = GameState.Menu;
+    }
+
     private void OnEnable()
     {
         _inputActions?.Enable();

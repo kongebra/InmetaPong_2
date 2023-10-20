@@ -27,12 +27,13 @@ public class Ball : MonoBehaviour
         _idleState = true;
     }
 
-    public void Reset()
+    public void Reset(bool idleState = false)
     {
-        _idleState = false;
+        _idleState = idleState;
 
         _speed = _initialSpeed;
         transform.position = Vector3.zero;
+
         _direction = (-Vector2.one).normalized;
     }
 
@@ -51,8 +52,6 @@ public class Ball : MonoBehaviour
             {
                 _onBallHitPlayer?.Raise();
                 _speed *= GameManager.Instance.SpeedMultiplier;
-
-                Debug.Log($"Ball speed: {_speed}");
             }
 
         }

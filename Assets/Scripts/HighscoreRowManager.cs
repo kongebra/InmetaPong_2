@@ -6,8 +6,15 @@ using UnityEngine;
 
 public class HighscoreRowManager : MonoBehaviour
 {
+    public static HighscoreRowManager Instance;
+
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject _highscoreRowPrefab;
+
+    [Header("Game Events")]
+    [SerializeField]
+    private GameEvent _onScoreSubmitted;
 
     private string filePath;
 
@@ -16,6 +23,11 @@ public class HighscoreRowManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         filePath = Path.Combine("./highScoresnew.json");
 
         LoadScores();
@@ -38,7 +50,7 @@ public class HighscoreRowManager : MonoBehaviour
         {
             _playerScores.Add(new PlayerScoreData()
             {
-                playerName = "AAA",
+                playerName = "---",
                 score = 0
             });
         }
@@ -78,6 +90,8 @@ public class HighscoreRowManager : MonoBehaviour
         // Save scores
         SaveScores();
 
+        _onScoreSubmitted?.Raise();
+
         // Render top 10
         RenderTop10();
     }
@@ -86,32 +100,55 @@ public class HighscoreRowManager : MonoBehaviour
     [ContextMenu("Debug: Add Random Score")]
     public void DebugAddRandomScore()
     {
+        var names = new string[] {
+            "John",
+            "Sally",
+            "Bob",
+            "Alice",
+            "Joe",
+            "Jane",
+            "Bill",
+            "Jill",
+            "Jack",
+            "Jen",
+            "Jim",
+            "Karl",
+            "Fred",
+            "Carl Johan",
+            "Frank von Fristelsen",
+            "Sven Svensson",
+        };
+
+        var name = names[Random.Range(0, names.Length)];
         var score = Random.Range(0, 100);
-        Debug.Log($"Adding random score: {score}.");
 
         AddScore(new PlayerScoreData()
         {
-            playerName = "DEBUG",
+            playerName = name,
             score = score,
         });
     }
 #endif
 
+#if UNITY_EDITOR
+    [ContextMenu("Debug: Delete High Scores File")]
     public void DeleteHighScoresFile()
     {
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
             Debug.Log("High scores file deleted.");
-
-            // Optionally, you can also clear the scores from memory
-            _playerScores.Clear();
         }
         else
         {
             Debug.LogWarning("High scores file not found.");
         }
+
+        _playerScores.Clear();
+        FillDefaultScores();
+        RenderTop10();
     }
+#endif
 
     public void SaveScores()
     {

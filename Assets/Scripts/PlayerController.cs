@@ -58,8 +58,9 @@ public class PlayerController : MonoBehaviour
                 var ballPos = _ball.transform.position;
                 var pos = transform.position;
 
+
                 // lerp Y position to ball position
-                pos.y = Mathf.Lerp(pos.y, ballPos.y, 0.1f);
+                pos.y = Mathf.Lerp(pos.y, ballPos.y, Time.fixedDeltaTime * _speed);
 
                 // clamp Y position
                 pos.y = Mathf.Clamp(pos.y, -yCalculateBound, yCalculateBound);
@@ -111,5 +112,11 @@ public class PlayerController : MonoBehaviour
     public void HandleGameOver()
     {
         _movement = Vector2.zero;
+    }
+
+    public void TurnOnIdleState()
+    {
+        ResetPosition();
+        _idleState = true;
     }
 }
