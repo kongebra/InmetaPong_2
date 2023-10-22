@@ -2110,6 +2110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialSpeed: 15
+  _maxSpeed: 64
   _onBallHitPlayer: {fileID: 11400000, guid: c12276869a1f1c24eb2c87bb4c8061ea, type: 2}
   _onBallHitDeathWall: {fileID: 11400000, guid: 7c6fc57974dd89d4dafdb9b0065a9ce7, type: 2}
   _gameVolume: 1
@@ -3476,7 +3477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1761440005
 Transform:
   m_ObjectHideFlags: 0
