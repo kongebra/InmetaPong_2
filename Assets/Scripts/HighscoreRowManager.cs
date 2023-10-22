@@ -84,7 +84,7 @@ public class HighscoreRowManager : MonoBehaviour
     {
         // Handle duplicate emails
         var index = _playerScores.FindIndex(x => x.email == data.email);
-        if (index >= 0)
+        if (index >= 0 && !string.IsNullOrEmpty(data.email))
         {
             var prevScore = _playerScores[index].score;
             // Check if we want to update the score
@@ -134,13 +134,17 @@ public class HighscoreRowManager : MonoBehaviour
             "Sven Svensson",
         };
 
+
         var name = names[Random.Range(0, names.Length)];
-        var score = Random.Range(0, 100);
+        var score = Random.Range(1, 20);
+
+        var email = $"{name.ToLower().Replace(" ", ".")}@example.com";
 
         AddScore(new PlayerScoreData()
         {
             playerName = name,
             score = score,
+            email = email,
         });
     }
 #endif

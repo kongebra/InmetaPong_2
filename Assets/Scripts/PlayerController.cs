@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Padel Bounds")]
     [SerializeField]
-    private float _bounds = 11f;
+    private float _bounds = 11.3333f;
     [SerializeField]
     private float _padelLength = 4f;
 
@@ -118,5 +118,17 @@ public class PlayerController : MonoBehaviour
     {
         ResetPosition();
         _idleState = true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        var pos = transform.position;
+        pos.y = 0;
+
+        var size = new Vector3(1f, yCalculateBound * 2 + _padelLength, 1f);
+
+        Gizmos.DrawWireCube(pos, size);
     }
 }

@@ -67,6 +67,12 @@ public class GameManager : MonoBehaviour
                 _gotoFormInputEvent?.Raise();
                 _gameState = GameState.FormInput;
                 break;
+
+            case GameState.Paused:
+                _startGameEvent?.Raise();
+                Time.timeScale = 1f;
+                _gameState = GameState.Playing;
+                break;
         }
     }
 
@@ -96,6 +102,12 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 _startGameEvent?.Raise();
                 _gameState = GameState.Playing;
+                break;
+
+            case GameState.Paused:
+                _gameState = GameState.Playing;
+                Time.timeScale = 1f;
+                _unpauseGameEvent?.Raise();
                 break;
         }
     }

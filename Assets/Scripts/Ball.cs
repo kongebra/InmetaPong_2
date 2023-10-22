@@ -10,6 +10,8 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private float _initialSpeed = 15f;
     private float _speed = 10f;
+    [SerializeField]
+    private float _maxSpeed = 64f;
 
     private bool _idleState = true;
 
@@ -63,6 +65,10 @@ public class Ball : MonoBehaviour
             {
                 _onBallHitPlayer?.Raise();
                 _speed *= GameManager.Instance.SpeedMultiplier;
+
+                _speed = Mathf.Min(_speed, _maxSpeed);
+
+                Debug.Log($"Ball speed: {_speed}");
             }
 
             _audioSource.Play();

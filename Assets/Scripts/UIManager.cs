@@ -9,6 +9,12 @@ public class UIManager : MonoBehaviour
     [Header("Texts")]
     [SerializeField]
     private TMPro.TextMeshProUGUI _scoreText;
+    private void ShowScoreText() => _scoreText.gameObject.SetActive(true);
+    private void HideScoreText() => _scoreText.gameObject.SetActive(false);
+    [SerializeField]
+    private TMPro.TextMeshProUGUI _gameOverScoreText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI _pauseScoreText;
 
     private void Awake()
     {
@@ -23,18 +29,27 @@ public class UIManager : MonoBehaviour
         ShowHighscorePanel();
         HideSubmitFormPanel();
         HideGameOverPanel();
+        HidePausePanel();
 
-        _backdrop.SetActive(true);
-        _scoreText.gameObject.SetActive(false);
+        ShowBackdrop();
+        HideScoreText();
     }
 
     [Header("Backdrop")]
     [SerializeField]
     private GameObject _backdrop;
+    private void ShowBackdrop() => _backdrop.SetActive(true);
+    private void HideBackdrop() => _backdrop.SetActive(false);
 
     [Header("Panels")]
+    #region Pause Panel
+    [SerializeField]
+    private GameObject _pausePanel;
+    private void ShowPausePanel() => _pausePanel.SetActive(true);
+    private void HidePausePanel() => _pausePanel.SetActive(false);
+    #endregion
+
     #region Highscore Panel
-    [Header("Highscore Panel")]
     [SerializeField]
     private GameObject _highscorePanel;
     private void ShowHighscorePanel() => _highscorePanel.SetActive(true);
@@ -42,7 +57,6 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Submit Form Panel
-    [Header("Submit Form Panel")]
     [SerializeField]
     private GameObject _submitFormPanel;
     private void ShowSubmitFormPanel() => _submitFormPanel.SetActive(true);
@@ -50,11 +64,8 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Game Over Panel
-    [Header("Game Over Panel")]
     [SerializeField]
     private GameObject _gameOverPanel;
-    [SerializeField]
-    private TMPro.TextMeshProUGUI _gameOverScoreText;
     private void ShowGameOverPanel() => _gameOverPanel.SetActive(true);
     private void HideGameOverPanel() => _gameOverPanel.SetActive(false);
     #endregion
@@ -64,9 +75,10 @@ public class UIManager : MonoBehaviour
         ShowGameOverPanel();
         HideHighscorePanel();
         HideSubmitFormPanel();
+        HidePausePanel();
 
-        _backdrop.SetActive(true);
-        _scoreText.gameObject.SetActive(false);
+        ShowBackdrop();
+        HideScoreText();
     }
 
     public void HandleGameStart()
@@ -74,9 +86,10 @@ public class UIManager : MonoBehaviour
         HideGameOverPanel();
         HideHighscorePanel();
         HideSubmitFormPanel();
+        HidePausePanel();
 
-        _backdrop.SetActive(false);
-        _scoreText.gameObject.SetActive(true);
+        HideBackdrop();
+        ShowScoreText();
     }
 
     public void ShowForm()
@@ -84,9 +97,10 @@ public class UIManager : MonoBehaviour
         ShowSubmitFormPanel();
         HideHighscorePanel();
         HideGameOverPanel();
+        HidePausePanel();
 
-        _backdrop.SetActive(true);
-        _scoreText.gameObject.SetActive(false);
+        ShowBackdrop();
+        HideScoreText();
     }
 
     public void HandleScoreSubmitted()
@@ -94,24 +108,40 @@ public class UIManager : MonoBehaviour
         HideSubmitFormPanel();
         ShowHighscorePanel();
         HideGameOverPanel();
+        HidePausePanel();
 
-        _backdrop.SetActive(true);
-        _scoreText.gameObject.SetActive(false);
+        ShowBackdrop();
+        HideScoreText();
     }
 
     public void UpdateScoreText()
     {
-        _gameOverScoreText.text = $"Score: {GameManager.Instance.Score}";
-        _scoreText.SetText($"Score: {GameManager.Instance.Score}");
+        var text = $"Score: {GameManager.Instance.Score}";
+
+        _gameOverScoreText.text = text;
+        _scoreText.text = text;
+        _pauseScoreText.text = text;
     }
 
     public void HandlePauseGame()
     {
-        _backdrop.SetActive(true);
+        HideGameOverPanel();
+        HideHighscorePanel();
+        HideSubmitFormPanel();
+        ShowPausePanel();
+
+        ShowBackdrop();
+        HideScoreText();
     }
 
     public void HandleUnpauseGame()
     {
-        _backdrop.SetActive(false);
+        HideGameOverPanel();
+        HideHighscorePanel();
+        HideSubmitFormPanel();
+        HidePausePanel();
+
+        HideBackdrop();
+        ShowScoreText();
     }
 }
