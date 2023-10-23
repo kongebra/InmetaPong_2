@@ -58,9 +58,8 @@ public class PlayerController : MonoBehaviour
                 var ballPos = _ball.transform.position;
                 var pos = transform.position;
 
-
                 // lerp Y position to ball position
-                pos.y = Mathf.Lerp(pos.y, ballPos.y, Time.fixedDeltaTime * _speed);
+                pos.y = Mathf.Lerp(pos.y, ballPos.y, Time.fixedDeltaTime * _speed * 100f);
 
                 // clamp Y position
                 pos.y = Mathf.Clamp(pos.y, -yCalculateBound, yCalculateBound);

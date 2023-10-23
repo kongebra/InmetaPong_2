@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -95,6 +96,13 @@ public class Ball : MonoBehaviour
     private const float MAX_Y = 1.0f;
     private void HandlePaddleHit(Collision2D paddleCollision)
     {
+        if (_idleState)
+        {
+            _direction.x = -_direction.x;
+
+            return;
+        }
+
         // Calculate where the ball hit the paddle (-1 = bottom, 1 = top)
         float hitFactor = (transform.position.y - paddleCollision.transform.position.y) / paddleCollision.collider.bounds.size.y;
 
