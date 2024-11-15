@@ -56,6 +56,16 @@ public class Ball : MonoBehaviour
         transform.Translate(_direction * _speed * Time.fixedDeltaTime);
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall") &&
+            (collision.gameObject.name == "Top" || collision.gameObject.name == "Bottom"))
+        {
+            Debug.Log("Prolonged collision with wall");
+            _direction = Vector2.Reflect(_direction, collision.contacts[0].normal);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
