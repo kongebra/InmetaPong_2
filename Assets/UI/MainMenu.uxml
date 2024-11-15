@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/main-menu.uss?fileID=7433441132597879392&amp;guid=6028d2c60fdcf4bd08b34b2f6b4047e8&amp;type=3#main-menu" />
+    <ui:VisualElement name="Panel" class="panel">
+        <ui:VisualElement name="Container" class="menu">
+            <ui:VisualElement name="Logo" class="logo" style="flex-grow: 1;" />
+            <ui:Button text="Continue" />
+            <ui:Button text="Restart" />
+            <ui:Button text="Quit" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
