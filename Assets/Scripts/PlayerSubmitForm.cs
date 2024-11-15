@@ -15,6 +15,12 @@ public class PlayerSubmitForm : MonoBehaviour
     [SerializeField]
     private TMPro.TMP_InputField _emailInputField;
 
+    [Header("Game Objects")] 
+    [SerializeField]
+    private GameObject _formControlEmail;
+    [SerializeField]
+    private GameObject _formControlPhone;
+
     [Header("Error Texts")]
     [SerializeField]
     private TMPro.TextMeshProUGUI _nameErrorText;
@@ -26,6 +32,18 @@ public class PlayerSubmitForm : MonoBehaviour
     [Header("Buttons")]
     [SerializeField]
     private UnityEngine.UI.Button _submitButton;
+    
+    [Header("Enable/Disable Fields")]
+    [SerializeField]
+    private bool _enablePhone = false;
+    [SerializeField]
+    private bool _enableEmail = false;
+    
+    [Header("Required Fields")]
+    [SerializeField]
+    private bool _requirePhone = false;
+    [SerializeField]
+    private bool _requireEmail = false;
 
     private void Awake()
     {
@@ -33,6 +51,16 @@ public class PlayerSubmitForm : MonoBehaviour
 
         ClearInputs();
         ClearErrors();
+        
+        if (!_enablePhone)
+        {
+            _formControlPhone?.SetActive(false);
+        }
+
+        if (!_enableEmail)
+        {
+            _formControlEmail?.SetActive(false);
+        }
     }
 
     private void Start()
@@ -78,19 +106,21 @@ public class PlayerSubmitForm : MonoBehaviour
         }
 
         var phone = _phoneInputField.text;
-        if (string.IsNullOrEmpty(phone))
+        if (_requirePhone && string.IsNullOrEmpty(phone))
         {
             // Should this be required?
+            _phoneErrorText.text = "Phone is required";
+            hasError = true;
         }
 
         var email = _emailInputField.text.ToLower();
-        if (string.IsNullOrEmpty(email))
+        if (_requireEmail && string.IsNullOrEmpty(email))
         {
             _emailErrorText.text = "Email is required";
             hasError = true;
         }
 
-        if (!IsValidEmail(email))
+        if (_requireEmail && !IsValidEmail(email))
         {
             _emailErrorText.text = "Email is invalid";
             hasError = true;
